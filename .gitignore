@@ -33,3 +33,9 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+*.sublime-project
+*.sublime-workspace
+
+.webassets-cache
+generated.css
+generated.js

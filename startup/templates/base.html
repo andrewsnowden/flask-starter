@@ -1,0 +1,117 @@
+{% import "macros/bootstrap_wtf.html" as wtf %}
+
+<!DOCTYPE html>
+<html{% block html_attribs %} lang="en"{% endblock %}>
+    {%- block html %}
+    <head>
+        <link type="image/x-icon" href="/static/images/favicon.ico" rel="shortcut icon">
+        {%- block head %}
+        <meta charset="utf-8">
+        <title>{% block title %}{% if title %}{{ title }}{% else %}{{ config["PROJECT_NAME"] }}{% endif %}{% endblock %}</title>
+        {%- block meta %}
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google" content="notranslate">
+        <meta http-equiv="Content-Language" content="en" />
+        {%- endblock %}
+
+        {%- block style %}
+            {% if ASSETS_USE_CDN %}
+                <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css">
+                <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css">
+                <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/3.0.2/css/font-awesome.min.css">
+            {% else %}
+                <link rel="stylesheet" href="/static/styles/dependencies/bootstrap.min.css">
+                <link rel="stylesheet" href="/static/styles/dependencies/bootstrap-responsive.min.css">
+                <link rel="stylesheet" href="/static/styles/dependencies/font-awesome.min.css">
+            {% endif %}
+
+            <!-- Generated stylesheets -->
+            {% assets "less_stylesheets" %}
+                <link href="{{ ASSET_URL }}" rel="stylesheet">
+            {% endassets %}
+        {%- endblock style %}
+
+        {% if ASSETS_USE_CDN %}
+            <script src="//cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.min.js" type="text/javascript"></script>
+        {% else %}
+            <script src="/static/scripts/dependencies/head.min.js" type="text/javascript"></script>
+        {% endif %}
+
+        <script type="text/javascript">
+            head.js(
+                {%- if ASSETS_USE_CDN %}
+                    "//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js",
+                    "//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js",
+                {% else %}
+                    "/static/scripts/dependencies/jquery.min.js",
+                    "/static/scripts/dependencies/bootstrap.min.js",
+                {% endif -%}
+
+                {%- assets "coffee_scripts" -%}
+                    "{{ ASSET_URL }}"
+                {%- endassets %}
+            );
+
+        </script>
+        {%- block favicons %}
+        {%- endblock %}
+
+    {%- endblock %}
+    </head>
+    <body>
+    {%- block body %}
+        {%- block body_content %}
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a href="/" class="brand">{{ config["PROJECT_NAME"] }}</a>
+            </div>
+        </div>
+
+        {%- block body_inner%}
+        <div class="container" style="margin-top: 20px">
+            <div id="messages-wrap">
+                <div id="messages">
+                {% for category, msg in get_flashed_messages(with_categories=true) %}
+                    {% if loop.first %}
+                        <br />
+                    {% endif %}
+                    <div class="alert alert-{{ category }}">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        {{ msg }}
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+
+
+            {%- block content %}
+            {% endblock content %}
+        </div>
+        {%- endblock body_inner %}
+        {%- endblock body_content %}
+
+        {%- if config['BOOTSTRAP_GOOGLE_ANALYTICS_ACCOUNT'] %}
+            <script type="text/javascript">
+                var _gaq = _gaq || [];
+                _gaq.push(['_setAccount', '{{config['BOOTSTRAP_GOOGLE_ANALYTICS_ACCOUNT']}}']);
+                _gaq.push(['_trackPageview']);
+
+                (function() {
+                    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                })();
+            </script>
+        {%- endif %}
+
+        {% block end_scripts %}
+        {% endblock end_scripts %}
+    {%- endblock body %}
+    </body>
+
+    <!-- Font Awesome is licensed CC-BY-3.0: http://fortawesome.github.com/Font-Awesome -->
+    {%- endblock html %}
+</html>

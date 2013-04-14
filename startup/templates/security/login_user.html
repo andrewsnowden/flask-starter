@@ -1,0 +1,22 @@
+{% extends "security/base.html" %}
+
+{% block security_content %}
+    <h1>Login</h1>
+    <form class="form form-horizontal" action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
+        {{ login_user_form.csrf_token }}
+
+        {{ wtf.horizontal_field(login_user_form.email) }}
+        {{ wtf.horizontal_field(login_user_form.password) }}
+        {{ wtf.horizontal_field(login_user_form.remember) }}
+
+        <div class="form-actions">
+            <input type="submit" value="Login" class="btn btn-primary" />
+        </div>
+    </form>
+
+    <p>
+        Don't have an account yet? <a href="{{ url_for_security('register') }}">Create a new account</a><br />
+        <a href="{{ url_for_security('forgot_password') }}">Forgot your password?</a><br />
+        Didn't receive your confirmation email? <a href="{{ url_for_security('send_confirmation') }}">Resend confirmation email</a>
+    </p>
+{% endblock %}
