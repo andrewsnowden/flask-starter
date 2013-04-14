@@ -3,14 +3,14 @@ flask-starter
 
 A boilerplate Flask project, features and included extensions include:
 
-    SQLAlchemy database and automatic migrations using Flask-Alembic
-    CoffeeScript and LESS compilation and bundling using Flask-Assets
-    User management and logins using Flask-Security
-    Email using Flask-Mail
-    Better development mode using Flask-Failsafe
-    Deployment helpers for nginx/uWSGI and upstart
-    Admin interface using Flask-Admin with automatically generated CRUD
-    Basic management scripts using Flask-Scripts
+* SQLAlchemy database and automatic migrations using Flask-Alembic
+* CoffeeScript and LESS compilation and bundling using Flask-Assets
+* User management and logins using Flask-Security
+* Email using Flask-Mail
+* Better development mode using Flask-Failsafe
+* Deployment helpers for nginx/uWSGI and upstart
+* Admin interface using Flask-Admin with automatically generated CRUD
+* Basic management scripts using Flask-Scripts
 
 
 Installing dependencies
