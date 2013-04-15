@@ -45,9 +45,6 @@ def init(name):
         with open(filename, 'w') as f:
             f.writelines(lines)
 
-    print "Renaming 'starter' module to '%s'" % (module_name, )
-    os.rename("starter", module_name)
-
     print 'Generating salts and secret keys'
     with open("starter/config.py") as f:
         lines = f.readlines()
@@ -58,6 +55,9 @@ def init(name):
                 line = line.replace("REPLACE_WITH_RANDOM", bcrypt.gensalt())
 
             f.write(line)
+
+    print "Renaming 'starter' module to '%s'" % (module_name, )
+    os.rename("starter", module_name)
 
     print "Finished initializing project"
 
