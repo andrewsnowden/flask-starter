@@ -28,7 +28,7 @@ def init(name):
     module_name = "_".join(name.split()).lower()
     print "Python main module will be:", module_name
 
-    module_files = ["manage.py", "dev.py", "shell.py"]
+    module_files = ["manage.py", "dev.py", "shell.py", "starter/config.py"]
 
     for filename in module_files:
         print "Updating module name in '%s'" % (filename, )
