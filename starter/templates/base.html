@@ -67,11 +67,34 @@
             <div class="navbar-inner">
                 <div class="container">
                     <a href="/" class="brand">{{ config["PROJECT_NAME"].title() }}</a>
+                    <ul class="nav">
+                        {%- for endpoint, caption in [
+                            ('index', 'Home')
+                        ] %}
+                            <li{% if endpoint == request.endpoint %} class="active"{% endif %}>
+                                <a href={{url_for(endpoint) }}>{{ caption }}</a>
+                            </li>
+                        {%- endfor %}
+
+                        {% if current_user.has_role("admin") %}
+                            <li{% if 'admin' == request.endpoint %} class="active"{% endif %}>
+                                <a href="/admin">Admin</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+
+                    {% if current_user.is_active() %}
+                    <ul class="nav pull-right">
+                        <li><a href={{url_for_security('logout')}}>Logout</a></li>
+                    </ul>
+
+                    {% endif %}
+                </div>
             </div>
         </div>
 
         {%- block body_inner%}
-        <div class="container" style="margin-top: 20px">
+        <div class="container" style="margin-top: 60px">
             <div id="messages-wrap">
                 <div id="messages">
                 {% for category, msg in get_flashed_messages(with_categories=true) %}
