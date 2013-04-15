@@ -39,3 +39,4 @@ nosetests.xml
 .webassets-cache
 generated.css
 generated.js
+tmp
