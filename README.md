@@ -37,16 +37,19 @@ from http://nodejs.org/ or using apt-get install npm.
 Getting started
 ---------------
 
+### Naming your project
+
 To get started, just clone the project and run the init script to rename your project:
 
     $ python manage.py init <project_name>
 
 You will need to configure your database settings and then perform the required database initialization.
 
-Database migrations
--------------------
+### Creating your database
 
 Database migrations are handled by [Flask-Alembic](https://github.com/tobiasandtobias/flask-alembic)
+
+You will need to perform all three of these steps to create your database before the first run.
 
 First, have Flask-Alembic generate an alembic.ini
 
@@ -61,6 +64,15 @@ database will be in sync with the models. To apply migrations you would want to
 run:
 
     $ python manage.py migrate upgrade head
+
+### Adding an admin user
+
+Once you have initialized the database you should add yourself as an admin:
+
+    $ python manage.py add_admin test@example.com password
+
+This will allow you to view the admin interface at /admin once you have logged in
+
 
 Deployment:
 -----------
