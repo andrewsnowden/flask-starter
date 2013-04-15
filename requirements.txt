@@ -1,10 +1,10 @@
 flask==0.9
-webassets==0.9.dev
 wtforms==1.0.2
 SQLAlchemy==0.8
 alembic==0.4.2
 Flask-Security==1.6.2
 Flask-SQLAlchemy==0.16
+webassets==0.9.dev
 flask-assets==0.9.dev
 flask-wtf==0.8
 Flask-Mail==0.7.6
@@ -12,3 +12,6 @@ Flask-Failsafe==0.1
 Flask-Script==0.5.3
 Flask-Admin==1.0.5
 git+https://github.com/tobiasandtobias/flask-alembic.git
+python-dateutil==2.1
+pytz==2012j
+Flask-Bcrypt==0.5.2
