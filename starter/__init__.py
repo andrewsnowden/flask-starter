@@ -91,7 +91,7 @@ class SecuredModelView(ModelView):
 
 admin = Admin(app, "Auth", index_view=SecuredAdminIndexView())
 
-
+model_classes = []
 if app.config.get("AUTOGENERATE_MODEL_ADMIN", True):
     # We have to hook in to the db.Model metaclass to keep track of any table
     # classes we define
@@ -99,8 +99,7 @@ if app.config.get("AUTOGENERATE_MODEL_ADMIN", True):
         def __init__(self, name, bases, d):
             super(self.__class__, self).__init__(name, bases, d)
             if name != "Model":
-                admin.add_view(SecuredModelView(self, db.session,
-                    category="CRUD"))
+                model_classes.append(self)
 
     db.Model = sqlalchemy.declarative_base(cls=sqlalchemy.Model,
         name="Model", mapper=sqlalchemy.signalling_mapper,
@@ -117,3 +116,7 @@ for root, dirname, files in os.walk(app.config["BASEDIR"]):
             relative = os.path.relpath(os.path.join(root, filename))[:-3]
             module = ".".join(relative.split(os.sep))
             __import__(module, level=-1)
+
+for cls in model_classes:
+    admin.add_view(SecuredModelView(cls, db.session,
+        category="CRUD"))
