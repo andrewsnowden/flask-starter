@@ -1,6 +1,7 @@
 from flask.ext.script import Manager
 from flask.ext.alembic import ManageMigrations
 import os
+import datetime
 
 from starter import app, db
 from starter.users.models import user_datastore
@@ -16,6 +17,8 @@ def add_admin(email, password):
 
     admin_role = user_datastore.find_or_create_role("admin")
     user_datastore.add_role_to_user(user, admin_role)
+
+    user.confirmed_at = datetime.datetime.utcnow()
 
     db.session.commit()
     print "Created admin user: %s" % (user, )
