@@ -13,12 +13,10 @@ class User(JsonResource):
         user = request.required_dict("user")
 
         password = user.optional("password")
-        print 'password', password
 
         if password:
             current_user.password = encrypt_password(password)
 
-        print current_user.password
         db.session.commit()
 
         return {
