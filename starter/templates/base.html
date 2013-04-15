@@ -83,12 +83,13 @@
                         {% endif %}
                     </ul>
 
-                    {% if current_user.is_active() %}
                     <ul class="nav pull-right">
+                    {% if current_user.is_active() %}
                         <li><a href={{url_for_security('logout')}}>Logout</a></li>
-                    </ul>
-
+                    {% else %}
+                        <li><a href={{url_for_security('login')}}>Login</a></li>
                     {% endif %}
+                    </ul>
                 </div>
             </div>
         </div>
