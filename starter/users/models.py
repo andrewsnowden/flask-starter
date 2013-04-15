@@ -1,5 +1,6 @@
-from .. import app, db
+from .. import app, db, api
 from flask.ext import security
+import pytz
 
 # Define models
 roles_users = db.Table('roles_users',
@@ -28,6 +29,24 @@ class User(db.Model, security.UserMixin):
     last_login_ip = db.Column(db.String(32))
     current_login_ip = db.Column(db.String(32))
     login_count = db.Column(db.Integer())
+    timezone = db.Column(db.String(64))
+
+    def get_tz(self):
+        if self.timezone:
+            return pytz.timezone(self.timezone)
+        else:
+            return app.config.get("DEFAULT_TIMEZONE", pytz.utc)
+
+    def dict(self):
+        """
+        A dictionary representation that can be used for JSON serialization
+        """
+        return {
+            "email": self.email,
+            "active": self.active,
+            "confirmed_at": api.serialize_date(self.confirmed_at),
+            "timezone": self.timezone
+        }
 
     def __str__(self):
         return "User(%s)" % (self.email, )

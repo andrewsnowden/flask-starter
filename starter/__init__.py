@@ -14,6 +14,7 @@ import os
 import os.path
 
 from .config import BaseConfig
+from .utils.api import Api
 
 # Expose API constructs through this module
 app = flask.Flask(BaseConfig.PROJECT_NAME)
@@ -28,10 +29,8 @@ mail = Mail(app)
 # Database
 db = sqlalchemy.SQLAlchemy(app)
 
-# Our API
-"""
+# An API
 api = Api(app, prefix="/api/v1")
-"""
 
 # Asset bundles
 assets = webassets.Environment(app)
