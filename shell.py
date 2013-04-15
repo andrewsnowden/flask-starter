@@ -1,5 +1,5 @@
 import os
 from flask import *
-from startup import *
+from starter import *
 
 os.environ["PYTHONINSPECT"] = 'True'

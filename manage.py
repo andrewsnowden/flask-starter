@@ -2,8 +2,8 @@ from flask.ext.script import Manager
 from flask.ext.alembic import ManageMigrations
 import os
 
-from startup import app, db
-from startup.users.models import user_datastore
+from starter import app, db
+from starter.users.models import user_datastore
 
 
 manager = Manager(app)
@@ -23,7 +23,7 @@ def add_admin(email, password):
 
 @manager.command
 def init(name):
-    print "Initializing flask-startup project with name '%s'" % (name, )
+    print "Initializing flask-starter project with name '%s'" % (name, )
 
     module_name = "_".join(name.split()).lower()
     print "Python main module will be:", module_name
@@ -34,13 +34,13 @@ def init(name):
         print "Updating module name in '%s'" % (filename, )
 
         with open(filename) as f:
-            lines = [l.replace("startup", module_name) for l in f.readlines()]
+            lines = [l.replace("starter", module_name) for l in f.readlines()]
 
         with open(filename, 'w') as f:
             f.writelines(lines)
 
-    print "Renaming 'startup' module to '%s'" % (module_name, )
-    os.rename("startup", module_name)
+    print "Renaming 'starter' module to '%s'" % (module_name, )
+    os.rename("starter", module_name)
 
 
 if __name__ == "__main__":
