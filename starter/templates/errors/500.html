@@ -1,0 +1,15 @@
+{% extends "errors/base.html" %}
+
+{% block error_content %}
+    <h2>Internal Server Error <small><span class="text-error">Error 500</span></small></h2>
+    <br />
+    <p>
+        There was an unexpected error while generating this page. The error
+        has been logged, but if it continues to occur then please contact the
+        web master.
+    </p>
+    <p>
+        Use your browsers <b>Back</b> button to navigate to the page you came
+        from, or go back to the <a href="/">home page</a>
+    </p>
+{% endblock %}

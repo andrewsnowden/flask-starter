@@ -1,7 +1,7 @@
 {% extends "security/base.html" %}
 
 {% block security_content %}
-    <h1>Login</h1>
+    <legend>Login</legend>
     <form class="form form-horizontal" action="{{ url_for_security('login') }}" method="POST" name="login_user_form">
         {{ login_user_form.csrf_token }}
 
