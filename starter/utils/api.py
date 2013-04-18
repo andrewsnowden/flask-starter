@@ -25,21 +25,11 @@ class Api(restful.Api):
         app.handle_exception = self.handle_exception
         app.handle_user_exception = self.handle_user_exception
 
-        self.endpoints = {}
-
-    def add_resource(self, resource, *urls, **kwargs):
-        super(Api, self).add_resource(resource, *urls, **kwargs)
-
-        endpoint = kwargs.get('endpoint', resource.__name__.lower())
-        self.endpoints[endpoint] = list()
-        for url in urls:
-            self.endpoints[endpoint].append(self.prefix + url)
-
     def handle_exception(self, e):
         if request.path.startswith(self.prefix):
             return super(Api, self).handle_error(e)
 
-        if(request.endpoint in self.endpoints.keys()):
+        if request.endpoint in self.endpoints:
             return super(Api, self).handle_error(e)
         else:
             return Flask.handle_exception(self.app, e)
@@ -48,7 +38,7 @@ class Api(restful.Api):
         if request.path.startswith(self.prefix):
             return super(Api, self).handle_error(e)
 
-        if(request.endpoint in self.endpoints.keys()):
+        if request.endpoint in self.endpoints:
             return super(Api, self).handle_error(e)
         else:
             return Flask.handle_user_exception(self.app, e)

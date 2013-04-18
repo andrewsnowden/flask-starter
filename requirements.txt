@@ -15,3 +15,4 @@ git+https://github.com/tobiasandtobias/flask-alembic.git
 python-dateutil==2.1
 pytz==2012j
 Flask-Bcrypt==0.5.2
+Flask-RESTful==0.2.1
