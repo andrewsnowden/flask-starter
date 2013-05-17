@@ -29,7 +29,7 @@ You may want to initialize a virtualenv for your project:
 
 First you must install the python package dependencies using PIP:
 
-    $ pip install -r requirements
+    $ pip install -r requirements.txt
 
 Compilers for LESS and CoffeeScript require the Node.js packages. Install npm
 from http://nodejs.org/ or using apt-get install npm. Once you have installed
