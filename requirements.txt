@@ -4,8 +4,8 @@ SQLAlchemy==0.8
 alembic==0.4.2
 Flask-Security==1.6.2
 Flask-SQLAlchemy==0.16
-webassets==0.9.dev
-flask-assets==0.9.dev
+git+https://github.com/miracle2k/webassets.git
+git+https://github.com/miracle2k/flask-assets.git
 flask-wtf==0.8
 Flask-Mail==0.7.6
 Flask-Failsafe==0.1
@@ -16,3 +16,4 @@ python-dateutil==2.1
 pytz==2012j
 Flask-Bcrypt==0.5.2
 Flask-RESTful==0.2.1
+Flask-Bootstrap==2.1.0-1
