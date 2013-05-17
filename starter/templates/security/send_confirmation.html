@@ -13,7 +13,11 @@
     </form>
 
     <p>
-        Don't have an account yet? <a href="{{ url_for_security('register') }}">Create a new account</a><br />
-        <a href="{{ url_for_security('forgot_password') }}">Forgot your password?</a>
+        {% if security.registerable %}
+            Don't have an account yet? <a href="{{ url_for_security('register') }}">Create a new account</a><br />
+        {% endif %}
+        {% if security.recoverable %}
+            <a href="{{ url_for_security('forgot_password') }}">Forgot your password?</a>
+        {% endif %}
     </p>
 {% endblock %}
