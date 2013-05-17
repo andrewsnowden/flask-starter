@@ -17,33 +17,31 @@ Features and extensions include:
 * Basic management scripts using Flask-Scripts
 
 
-Installing dependencies
------------------------
+Getting started
+---------------
 
-PIP Requirements:
+### Installing dependencies
 
-    $ pip install -r requirements.txt
+You may want to initialize a virtualenv for your project:
 
-Web assets:
+    $ virtualenv venv
+    $ source venv/bin/activate
 
-There is a bug in flask-assets that doesn't recompile LESS files, you have to
-install the dev version until these are packaged properly for PyPI:
+First you must install the python package dependencies using PIP:
 
-    $ easy_install http://github.com/miracle2k/flask-assets/tarball/master
-    $ easy_install http://github.com/miracle2k/webassets/tarball/master
+    $ pip install -r requirements
 
 Compilers for LESS and CoffeeScript require the Node.js packages. Install npm
-from http://nodejs.org/ or using apt-get install npm.
+from http://nodejs.org/ or using apt-get install npm. Once you have installed
+NPM you can must install the compilers:
 
     $ npm install -g coffee-script
     $ npm install -g less
 
-Getting started
----------------
 
 ### Naming your project
 
-To get started, just clone the project and run the init script to rename your project:
+Once you have installed the dependencies, call the init script to name your project:
 
     $ python manage.py init <project_name>
 
