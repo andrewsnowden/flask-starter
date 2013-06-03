@@ -41,3 +41,4 @@ generated.css
 generated.js
 tmp
 .DS_Store
+venv
