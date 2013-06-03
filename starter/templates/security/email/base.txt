@@ -1,0 +1,4 @@
+{% block content %}{% endblock %}
+
+Thanks,
+The {{ config["PROJECT_NAME"] }} team

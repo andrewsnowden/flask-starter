@@ -75,6 +75,17 @@ Once you have initialized the database you should add yourself as an admin:
 
 This will allow you to view the admin interface at /admin once you have logged in
 
+### Customizing Flask-Security
+
+All of the available Flask-Security templates have been included in the project.
+They have been modified so that they extend from base templates so that you can
+easily modify the look and feel of these pages and emails without editing each
+one individually.
+
+Emails extend from the security/mails/base.html and security/mails/base.txt templates.
+User related pages extend from the security/base.html template (which also extends
+from your standard project base template)
+
 
 Deployment:
 -----------
