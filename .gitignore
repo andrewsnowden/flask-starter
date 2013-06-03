@@ -40,4 +40,4 @@ nosetests.xml
 generated.css
 generated.js
 tmp
-DS_Store
+.DS_Store
