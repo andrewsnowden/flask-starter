@@ -14,4 +14,5 @@ def forbidden(e):
 
 @app.errorhandler(500)
 def internal_server_error(e):
+    app.logger.exception(e)
     return render_template("errors/500.html"), 500
