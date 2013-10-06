@@ -98,6 +98,7 @@ def wizard(test=False):
                 uri = parts[1].strip()
 
                 print '\n\nDatabase configuration:'
+                print '*** NB Please ensure your database has been created'
                 print ('Database string must be a valid python expression that'
                     ' will be understood by SQLAlchemy. Please include '
                     'surrounding quotes if this is just a static string')

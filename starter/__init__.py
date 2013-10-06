@@ -1,6 +1,5 @@
 import flask
 from flask.ext import sqlalchemy
-from flask.ext import bootstrap
 from flask.ext import assets as webassets
 from flask.ext.mail import Mail, Message
 from flask.ext.admin import Admin, AdminIndexView
@@ -23,7 +22,6 @@ app.config.from_object(BaseConfig)
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
 # Flask Extensions
-bootstrap.Bootstrap(app)
 mail = Mail(app)
 
 # Database
@@ -77,6 +75,23 @@ def send_mail(destination, subject, template, **template_kwargs):
             **template_kwargs)
 
     mail.send(msg)
+
+
+# WTForms helpers
+from utils import wtf
+wtf.add_helpers(app)
+
+
+# Bootstrap helpers
+def alert_class_filter(category):
+    # Map different message types to Bootstrap alert classes
+    categories = {
+        "message": "warning"
+    }
+    return categories.get(category, category)
+
+
+app.jinja_env.filters['alert_class'] = alert_class_filter
 
 
 # Admin interface

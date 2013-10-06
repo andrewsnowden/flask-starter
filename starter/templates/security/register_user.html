@@ -1,22 +1,29 @@
 {% extends "security/base.html" %}
 
 {% block security_content %}
-    <legend>Register</legend>
-    <form class="form form-horizontal" action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
-        {{ register_user_form.csrf_token }}
+  <div class="page-header">
+    <h1>Register an account</h1>
+  </div>
 
-        {{ wtf.horizontal_field(register_user_form.email) }}
-        {{ wtf.horizontal_field(register_user_form.password) }}
-        {% if register_user_form.password_confirm %}
-            {{ wtf.horizontal_field(register_user_form.password_confirm) }}
-        {% endif %}
+  <form class="form form-horizontal" action="{{ url_for_security('register') }}" method="POST" name="register_user_form">
+    {{ register_user_form.csrf_token }}
 
-        <div class="form-actions">
-            <input type="submit" value="Register" class="btn btn-primary" />
-        </div>
-    </form>
+    {{ wtf.horizontal_field(register_user_form.email) }}
+    {{ wtf.horizontal_field(register_user_form.password) }}
+    {% if register_user_form.password_confirm %}
+        {{ wtf.horizontal_field(register_user_form.password_confirm) }}
+    {% endif %}
 
-    <p>
-        Already have an account? <a href="{{ url_for_security('login') }}">Login here</a>
-    </p>
+    <div class="col-lg-offset-2">
+        <input type="submit" value="Register" class="btn btn-primary" />
+    </div>
+  </form>
+
+  <br />
+
+  <div class="panel panel-default">
+    <div class="panel-body">
+      Already have an account? <a href="{{ url_for_security('login') }}">Login here</a>
+    </div>
+  </div>
 {% endblock %}

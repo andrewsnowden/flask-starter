@@ -6,6 +6,7 @@ running quickly.
 
 Features and extensions include:
 
+* Bootstrap 3
 * SQLAlchemy database and automatic migrations using Flask-Alembic
 * CoffeeScript and LESS compilation and bundling using Flask-Assets
 * User management and logins using Flask-Security
@@ -59,7 +60,7 @@ First, have Flask-Alembic generate an alembic.ini
 
 To automatically generate a new revision:
 
-    $  python manage.py migrate revision --autogenerate -m "message describing migration"
+    $ python manage.py migrate revision --autogenerate -m "message describing migration"
 
 You should generate a migration every time you change the models so that the
 database will be in sync with the models. To apply migrations you would want to
