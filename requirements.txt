@@ -2,7 +2,7 @@ flask==0.9
 wtforms==1.0.2
 SQLAlchemy==0.8
 alembic==0.4.2
-Flask-Security==1.6.2
+Flask-Security==1.6.4
 Flask-SQLAlchemy==0.16
 git+https://github.com/miracle2k/webassets.git
 git+https://github.com/miracle2k/flask-assets.git
