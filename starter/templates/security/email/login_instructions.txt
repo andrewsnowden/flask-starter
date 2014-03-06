@@ -1,6 +1,6 @@
 {% extends "security/email/base.txt" %}
 
-{% block content %-}
+{% block content -%}
 Welcome {{ user.email }}!
 
 You can log into your through the link below:
