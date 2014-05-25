@@ -176,8 +176,7 @@ class JsonResource(restful.Resource):
     the request.values dictionary
     """
 
-    def __init__(self, *args, **kwargs):
-        super(JsonResource, self).__init__(*args, **kwargs)
-        self.method_decorators.append(json_data_wrapper)
-        self.method_decorators.append(api_error_wrapper)
-        self.method_decorators.append(api_helper_wrapper)
+    method_decorators = [
+        json_data_wrapper,
+        api_error_wrapper,
+        api_helper_wrapper]
