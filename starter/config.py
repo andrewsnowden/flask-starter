@@ -42,6 +42,7 @@ class BaseConfig:
 
 class ProductionConfig(BaseConfig):
     DEBUG = False
+    PROPAGATE_EXCEPTIONS = True
 
     ASSETS_MINIFY = True
     ASSETS_USE_CDN = True
