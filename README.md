@@ -28,7 +28,9 @@ You may want to initialize a virtualenv for your project:
     $ virtualenv venv
     $ source venv/bin/activate
 
-First you must install the python package dependencies using PIP:
+First you must install the python package dependencies using PIP. By default
+the project installs database drivers for both MySQL and PostgreSQL, you can
+remove the one you do not plan to use from requirements.txt if you like.
 
     $ pip install -r requirements.txt
 
