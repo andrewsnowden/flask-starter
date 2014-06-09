@@ -42,17 +42,32 @@ NPM you can must install the compilers:
 
 ### Naming your project
 
-Once you have installed the dependencies, call the init script to name your project:
+Once you have installed the dependencies, call the init script to name your
+project:
 
     $ python manage.py init <project_name>
 
-You will need to configure your database settings and then perform the required database initialization.
+You will need to configure your database settings and then perform the required
+database initialization.
 
-### Creating your database
+### Creating and connecting to your database
+
+Database support is provided through Flask-SQLAlchemy. By default this is
+configured to use MySQL. You can change this by using a different database
+URL in config.py. You should update this to use the correct username and host
+for your database. For example:
+
+    SQLALCHEMY_DATABASE_URI = "postgresql://andrew@localhost/{}".format(PROJECT_NAME)
+
+Before getting started you must create your database in MySQL/PostgreSQL
+
+    $ mysql
+    $ create database <database-name>
 
 Database migrations are handled by [Flask-Alembic](https://github.com/tobiasandtobias/flask-alembic)
 
-You will need to perform all three of these steps to create your database before the first run.
+You will need to perform all three of these steps to create your database
+before the first run.
 
 First, have Flask-Alembic generate an alembic.ini
 
@@ -74,7 +89,8 @@ Once you have initialized the database you should add yourself as an admin:
 
     $ python manage.py add_admin test@example.com password
 
-This will allow you to view the admin interface at /admin once you have logged in
+This will allow you to view the admin interface at /admin once you have logged
+in
 
 ### Customizing Flask-Security
 
@@ -83,9 +99,9 @@ They have been modified so that they extend from base templates so that you can
 easily modify the look and feel of these pages and emails without editing each
 one individually.
 
-Emails extend from the security/mails/base.html and security/mails/base.txt templates.
-User related pages extend from the security/base.html template (which also extends
-from your standard project base template)
+Emails extend from the security/mails/base.html and security/mails/base.txt
+templates. User related pages extend from the security/base.html template
+(which also extends from your standard project base template)
 
 
 Deployment:
