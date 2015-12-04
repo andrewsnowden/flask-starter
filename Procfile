@@ -1,0 +1,1 @@
+web: gunicorn yoco:app -w 8
