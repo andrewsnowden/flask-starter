@@ -1,1 +1,1 @@
-web: gunicorn yoco:app -w 8
+web: gunicorn starter:app -w 8

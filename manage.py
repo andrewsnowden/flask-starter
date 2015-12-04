@@ -37,7 +37,8 @@ def init(name, test=False, indent=""):
     module_name = "_".join(name.split()).lower()
     print "{0}Python main module will be: {1}".format(indent, module_name)
 
-    module_files = ["manage.py", "dev.py", "shell.py", "starter/config.py"]
+    module_files = ["manage.py", "dev.py", "shell.py", "starter/config.py",
+        "Procfile"]
 
     for filename in module_files:
         print "{0}Updating module name in '{1}'".format(indent, filename)
