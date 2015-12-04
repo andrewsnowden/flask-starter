@@ -1,0 +1,7 @@
+{
+    "name": "starter",
+    "dependencies": {
+        "less": "1.7.5",
+        "coffee-script": "1.10.0"
+    }
+}

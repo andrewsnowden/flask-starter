@@ -4,6 +4,8 @@ flask-starter
 A batteries included boilerplate Flask project for getting new projects up and
 running quickly.
 
+Warning: This project is not under active development
+
 Features and extensions include:
 
 * Bootstrap 3
@@ -109,8 +111,7 @@ templates. User related pages extend from the security/base.html template
 Deployment:
 -----------
 
-Heroku:
--------
+## Heroku:
 
 To deploy to Heroku you will need to add the Node.js buildpack to your
 application so that our LESS/Coffee assets can be compiled on the server.
@@ -118,8 +119,7 @@ application so that our LESS/Coffee assets can be compiled on the server.
     $ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-python.git
     $ heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-nodejs.git
 
-uWSGI and nginx:
-----------------
+## uWSGI and nginx:
 
 Deployment is done using uWSGI and nginx.
 
