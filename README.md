@@ -10,7 +10,7 @@ Features and extensions include:
 * SQLAlchemy database and automatic migrations using Flask-Alembic
 * CoffeeScript and LESS compilation and bundling using Flask-Assets
 * User management and logins using Flask-Security
-* Admin interface using Flask-Admin with automatically generated CRUD
+* Admin interface using Flask-Superadmin with automatically generated CRUD
 * REST API using Flask-Restful
 * Email using Flask-Mail
 * Better development mode using Flask-Failsafe
@@ -29,8 +29,8 @@ You may want to initialize a virtualenv for your project:
     $ source venv/bin/activate
 
 First you must install the python package dependencies using PIP. By default
-the project installs database drivers for both MySQL and PostgreSQL, you can
-remove the one you do not plan to use from requirements.txt if you like.
+the project installs database drivers for PostgreSQL, you can change this and
+add MySQL/SQLite if you like in requirements.txt
 
     $ pip install -r requirements.txt
 
@@ -55,35 +55,35 @@ database initialization.
 ### Creating and connecting to your database
 
 Database support is provided through Flask-SQLAlchemy. By default this is
-configured to use MySQL. You can change this by using a different database
+configured to use PostgresQL. You can change this by using a different database
 URL in config.py. You should update this to use the correct username and host
 for your database. For example:
 
     SQLALCHEMY_DATABASE_URI = "postgresql://andrew@localhost/{}".format(PROJECT_NAME)
 
-Before getting started you must create your database in MySQL/PostgreSQL
+Before getting started you must create your database in PostgreSQL/MySQL
 
-    $ mysql
+    $ psql
     $ create database <database-name>
 
-Database migrations are handled by [Flask-Alembic](https://github.com/tobiasandtobias/flask-alembic)
+Database migrations are handled by [Flask-Migrate](https://github.com/miguelgrinberg/Flask-Migrate)
 
 You will need to perform all three of these steps to create your database
 before the first run.
 
-First, have Flask-Alembic generate an alembic.ini
+First, have Flask-Migrate generate an alembic.ini
 
-    $ python manage.py migrate init
+    $ python manage.py db init
 
 To automatically generate a new revision:
 
-    $ python manage.py migrate revision --autogenerate -m "message describing migration"
+    $ python manage.py db revision --autogenerate -m "message describing migration"
 
 You should generate a migration every time you change the models so that the
 database will be in sync with the models. To apply migrations you would want to
 run:
 
-    $ python manage.py migrate upgrade head
+    $ python manage.py db upgrade head
 
 ### Adding an admin user
 

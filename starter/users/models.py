@@ -14,6 +14,9 @@ class Role(db.Model, security.RoleMixin):
     name = db.Column(db.String(80), unique=True)
     description = db.Column(db.String(255))
 
+    def __str__(self):
+        return self.name
+
 
 class User(db.Model, security.UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -51,7 +54,7 @@ class User(db.Model, security.UserMixin):
         }
 
     def __str__(self):
-        return "User(%s)" % (self.email, )
+        return self.name or self.email
 
 # Setup Flask-Security
 user_datastore = security.SQLAlchemyUserDatastore(db, User, Role)

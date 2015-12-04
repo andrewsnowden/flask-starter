@@ -2,9 +2,11 @@ import flask
 from flask.ext import sqlalchemy
 from flask.ext import assets as webassets
 from flask.ext.mail import Mail, Message
-from flask.ext.admin import Admin, AdminIndexView
-from flask.ext.admin.contrib.sqlamodel import ModelView
+from flask.ext.superadmin import Admin, AdminIndexView
+from flask.ext.superadmin.model.backends.sqlalchemy import ModelAdmin
 from flask.ext.login import current_user
+from flask.ext.migrate import Migrate
+from flask.ext.security.utils import logout_user
 
 from werkzeug.contrib.fixers import ProxyFix
 
@@ -29,6 +31,9 @@ db = sqlalchemy.SQLAlchemy(app)
 
 # An API
 api = Api(app, prefix="/api/v1")
+
+# Flask-Migrate
+migrate = Migrate(app, db)
 
 # Asset bundles
 assets = webassets.Environment(app)
@@ -95,16 +100,22 @@ app.jinja_env.filters['alert_class'] = alert_class_filter
 
 
 # Admin interface
+
 class SecuredAdminIndexView(AdminIndexView):
     def is_accessible(self):
-        return current_user.has_role("admin")
+        admin = current_user.has_role("admin")
+        if not admin:
+            flask.flash("You do not have permission to view this site")
+            logout_user()
+
+        return admin
 
 
-class SecuredModelView(ModelView):
+class SecuredModelView(ModelAdmin):
     def is_accessible(self):
         return current_user.has_role("admin")
 
-admin = Admin(app, "Auth", index_view=SecuredAdminIndexView())
+admin = Admin(app, app.config["PROJECT_NAME"])
 
 model_classes = []
 if app.config.get("AUTOGENERATE_MODEL_ADMIN", True):
@@ -117,7 +128,7 @@ if app.config.get("AUTOGENERATE_MODEL_ADMIN", True):
                 model_classes.append(self)
 
     db.Model = sqlalchemy.declarative_base(cls=sqlalchemy.Model,
-        name="Model", mapper=sqlalchemy.signalling_mapper,
+        name="Model",
         metaclass=_AdminBoundDeclarativeMeta)
     db.Model.query = sqlalchemy._QueryProperty(db)
 
@@ -133,5 +144,4 @@ for root, dirname, files in os.walk(app.config["BASEDIR"]):
             __import__(module, level=-1)
 
 for cls in model_classes:
-    admin.add_view(SecuredModelView(cls, db.session,
-        category="CRUD"))
+    admin.register(cls, session=db.session, admin_class=SecuredModelView)
