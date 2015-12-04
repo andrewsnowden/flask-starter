@@ -10,6 +10,17 @@ class BaseConfig:
 
     SQLALCHEMY_DATABASE_URI = "postgresql://postgres@localhost/{0}".format(PROJECT_NAME)
 
+    # Load a database URL from configuration if it exists
+    if os.environ.get("DATABASE_URL"):
+        url = os.environ.get("DATABASE_URL").replace(
+            "postgres://", "postgresql+psycopg2://")
+
+        if "postgresql" in url and "?" not in url:
+            # Force SSL (useful for remotely connecting to Heroku Postgres)
+            url = url + "?sslmode=require"
+
+        SQLALCHEMY_DATABASE_URI = url
+
     if os.name == "nt":
         LESS_BIN = "lessc.cmd"
         COFFEE_BIN = "coffee.cmd"
