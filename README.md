@@ -109,6 +109,18 @@ templates. User related pages extend from the security/base.html template
 Deployment:
 -----------
 
+Heroku:
+-------
+
+To deploy to Heroku you will need to add the Node.js buildpack to your
+application so that our LESS/Coffee assets can be compiled on the server.
+
+    $ heroku buildpacks:set https://github.com/heroku/heroku-buildpack-python.git
+    $ heroku buildpacks:add --index 1 https://github.com/heroku/heroku-buildpack-nodejs.git
+
+uWSGI and nginx:
+----------------
+
 Deployment is done using uWSGI and nginx.
 
 Install uWSGI and use the uwsgi.conf upstart script to start uWSGI with the
