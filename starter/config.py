@@ -8,7 +8,7 @@ class BaseConfig:
     DEBUG = True
     SECRET_KEY = "$2a$12$LdKsgm9HGNC6LzKVzJ48ju"
 
-    SQLALCHEMY_DATABASE_URI = "mysql://root@localhost/{0}".format(PROJECT_NAME)
+    SQLALCHEMY_DATABASE_URI = "postgresql://postgres@localhost/{0}".format(PROJECT_NAME)
 
     if os.name == "nt":
         LESS_BIN = "lessc.cmd"
@@ -38,6 +38,8 @@ class BaseConfig:
     SECURITY_CONFIRM_SALT = "$2a$12$QyCM19UPUNLMq8n225V7qu"
     SECURITY_RESET_SALT = "$2a$12$GrrU0tYteKw45b5VfON5p."
     SECURITY_REMEMBER_SALT = "$2a$12$unlKF.sL4gnm4icbk0tvVe"
+
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 
 class ProductionConfig(BaseConfig):

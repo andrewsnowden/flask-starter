@@ -83,7 +83,7 @@
                 </ul>
 
                 <ul class="nav navbar-nav pull-right">
-                {% if current_user.is_active() %}
+                {% if current_user.is_active %}
                     <li><a href={{url_for_security('logout')}}>Logout</a></li>
                 {% else %}
                     <li><a href={{url_for_security('login')}}>Login</a></li>

@@ -45,7 +45,7 @@ class Api(restful.Api):
 
     def serialize_date(self, date):
         if date:
-            if current_user.is_active():
+            if current_user.is_active:
                 utc = pytz.utc.localize(date)
                 localized = utc.astimezone(current_user.get_tz())
                 return localized.isoformat()

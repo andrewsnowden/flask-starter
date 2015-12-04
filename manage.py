@@ -1,16 +1,16 @@
 from flask.ext.script import Manager
-from flask.ext.alembic import ManageMigrations
 import os
 import datetime
 import bcrypt
 from flask.ext.security.utils import encrypt_password
+from flask.ext.migrate import Migrate, MigrateCommand
 
 from starter import app, db
 from starter.users.models import user_datastore
 
 
 manager = Manager(app)
-manager.add_command("migrate", ManageMigrations())
+manager.add_command('db', MigrateCommand)
 
 
 @manager.command
